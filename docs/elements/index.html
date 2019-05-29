@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us"><head>
   <meta charset="utf-8">
-  <title>Elements</title>
+  <title>Installation &amp; Deployment Guide</title>
 
   <meta name="generator" content="Hugo 0.55.6" />
 
@@ -115,72 +115,470 @@
         <div class="col-12">
           
 
-<h3 id="alarts">Alarts</h3>
+<h1 id="getting-started-with-cloudneeti-vm-for-azure-marketplace">Getting Started with Cloudneeti VM for Azure Marketplace</h1>
 
-<div class="alert rounded-0 alert-primary">
-  A simple primary alert—check it out!
-</div>
+<p>This article describes how to Automate Governance, Compliance, Reliability and Risk Monitoring for an enterprise using Azure</p>
 
-<div class="alert rounded-0 alert-secondary">
-  A simple secondary alert—check it out!
-</div>
+<p>To deploy Cloudneeti VM from the Azure Marketplace:</p>
 
-<div class="alert rounded-0 alert-success">
-  A simple success alert—check it out!
-</div>
+<p><strong>Note</strong>: User logging into Azure Portal must have Global admin role to make the necessary configuration changes.</p>
 
-<div class="alert rounded-0 alert-danger">
-  A simple danger alert—check it out!
-</div>
+<h2 id="purchase-cloudneeti-from-azure-marketplace">Purchase Cloudneeti from Azure Marketplace</h2>
 
-<div class="alert rounded-0 alert-warning">
-  A simple warning alert—check it out!
-</div>
+<ol>
+<li>Log in to the  <a href="https://portal.azure.com/">Microsoft Azure portal</a>.</li>
+<li>Click Marketplace or click Browse &gt; in the left side navigation, and select Marketplace from the list.</li>
+<li>In Click the Security + Identity blade and search for <code>Cloudneeti Enterprise</code>.</li>
+<li>Click Cloudneeti Enterprise</li>
+<li>In the Cloudneeti Enterprise blade, in Select a deployment model, select <code>Resource Manager</code>.</li>
+<li>Click Create. The Create virtual machine and Basics blades appear.</li>
 
-<div class="alert rounded-0 alert-info">
-  A simple info alert—check it out!
-</div>
+<li><p>On the Basics blade, complete the following fields:</p>
 
-<div class="alert rounded-0 alert-light">
-  A simple light alert—check it out!
-</div>
+<ul>
+<li><code>Name</code>: Type a descriptive name for your virtual machine.</li>
+<li><code>VM disk type</code>: Select disk type SSD or HDD</li>
+<li><code>User name</code>: Type a user name for logging in to your virtual machine</li>
+<li><code>Password</code>: Enter password for logging in to your virtual machine</li>
+<li><code>Confirm password</code>: Enter the same password for confirmation</li>
+<li><code>Subscription</code>: Select the subscription under which to create your virtual machine</li>
+<li><code>Resource group</code>: Specify the resource group to contain all your Cloudneeti VM resources. You can create a new resource group or select an existing resource group</li>
+<li><code>Location</code>: Select an Azure region from the Location list</li>
+<li>Click OK</li>
+</ul></li>
 
-<div class="alert rounded-0 alert-dark">
-  A simple dark alert—check it out!
-</div>
+<li><p>On the Choose a size blade, select a size and pricing tier for your virtual machine, and click Select.</p></li>
 
-<h3 id="syntax-highlight">Syntax Highlight</h3>
+<li><p>On the Settings blade, review the preconfigured values for each field, and click OK. Most fields have additional settings that are not displayed on the Settings  To see all settings, expand each field. after validation, review the Summary information, and then click OK.</p></li>
 
-<pre><code>&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/css/main.css&quot;&gt;
-  &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;/assets/img/favicon.png&quot; &gt;
-  &lt;script src=&quot;/assets/js/main.js&quot;&gt;&lt;/script&gt;
-&lt;/head&gt;
+<li><p>On the Purchase blade, review the offer details, Terms of use, privacy policy, and Azure Marketplace Terms and then click Purchase. The deployment is submitted</p></li>
+
+<li><p>Depending on the disk types and VM instance type, It might take approximately 8-20 minutes before your new virtual machine is running</p></li>
+
+<li><p>Update Network Security Group rules you must create rules that allow inbound for communication for the Cloudneeti application refer <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/nsg-quickstart-portal">Opening ports to a VM</a></p></li>
+
+<li><p>When installation is complete, we need to configure certain parameters to open the application, follow below mentioned steps</p>
+
+<ul>
+<li>Go to left pane of <a href="https://portal.azure.com/">Microsoft Azure portal</a> click on Resource Group and find for resource group which is created above under your subscription</li>
+<li>Then select the resource name against the the resource type &ldquo;Public IP address&rdquo; and go to the configuration settings of Public IP address resource type. Update the  DNS name label in the configuration blade. Note the DNS Name you specified it would be *&lt;DNSname&gt;.&lt;region&gt;.cloudapp.azure.com.<br />
+*it will be the Azure region / location which you have selected for creating VM</li>
+<li>In order to get an access to the Cloudneeti application you must set up an Azure Active Directory (AD) application and assign the required permissions to it Refer <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal">Azure Active Directory application</a>
+<br />
+<br /></li>
+</ul></li>
+</ol>
+
+<h3 id="configuring-authentication-and-authorization-using-active-directory-application">Configuring Authentication and Authorization using  Active Directory Application</h3>
+
+<p>Cloudneeti uses AD Application for requesting consent accessing your Azure Subscription resources. To create an Active Directory Application. Refer to documentation <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications">Integrating applications with Azure Active Directory</a></p>
+
+<h4 id="create-an-active-directory-application">Create an Active Directory Application</h4>
+
+<ol>
+<li>In the <a href="https://portal.azure.com/">Azure Portal</a>, select <strong>App
+Registrations</strong>.</li>
+<li>Click on New application registration button.
+Enter the Name for example &ldquo;Cloudneeti&rdquo;
+Select the Application Type as &ldquo;Web App/API&rdquo;
+Enter the Sign-on URL as &ldquo;&lt;DNSname&gt;.&lt;region&gt;.cloudapp.azure.com.&rdquo;</li>
+<li>Click <strong>Create</strong>.</li>
+<li>Click on the registered application &ldquo;Cloudneeti&rdquo;</li>
+<li>Click <strong>Settings</strong></li>
+<li>Click <strong>Reply URL</strong></li>
+<li>Enter <strong>Reply URL</strong> with DNS name created above                           &lt;DNSname&gt;.&lt;region&gt;.cloudapp.azure.com/Account/SignIn</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+
+<h4 id="authorize-application-id-to-access-your-subscription-resources">Authorize Application ID to access your Subscription resources</h4>
+
+<ol>
+<li>In the <a href="https://portal.azure.com/">Azure Portal</a>, select <strong>App
+Registrations</strong>.</li>
+<li>In App Registration blade, Click on the newly registered application if you had given the name &ldquo;Cloudneeti&rdquo; then click on the same.</li>
+<li>Click <strong>Settings</strong></li>
+<li>Click <strong>Keys</strong></li>
+<li>Enter a new description, Select a Expires value from the drop down and Click <strong>Save</strong></li>
+<li>The key value is generated, Copy the same for your record.</li>
+<li>To access resources in your subscription, you must assign the application to a role refer <strong><a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal#assign-application-to-role">Assign application to role</a></strong></li>
+</ol>
+
+<p>You can do both the steps i.e. Create an Active Directory Application using automated script and Authorize Application ID to access your Subscription resources using automated scripts provided below:</p>
+
+<h3 id="run-create-serviceprincipal-ps1">Run Create-ServicePrincipal.ps1</h3>
+
+<pre><code class="language-powershell">
+&lt;#
+Powershell Version : 5.0
+Pre-requisites to run this script -
+    Required Modules &amp; Version-
+    AzureRM  4.1.0
+    AzureADPreview  2.0.0.129
+    
+    You can Install the required modules by executing below command.
+    Install-Module AzureRM
+    Install-Module AzureADPreview
+    
+    Account permissions -
+    The account to execute this script must be an Azure AD Account with Global Administrator Permission at Tenant level and Owner permission at Subscription level.
+
+Description
+	This script creates an AD Application, Service Principal, Add Response URL and Grant permission at Subscription or ResourceGroup level. By default this will grant 'Reader'
+	permission to the App if only SubscriptionID is provided as a parameter input. This script requires SubscriptionID as a mandatory input. 
+
+Example 
+	 Creates a service principal without response url.
+    .\Create-ServicePrincipal.ps1 -subscriptionId xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx
+
+Example 
+	Creates a Service Principal with response url.
+	.\Create-ServicePrincipal.ps1 -subscriptionId xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx -dnsNameLabel tjgj7s-enterprise.eastus.cloudapp.azure.com
+	
+
+Example 
+	Creates an App and grant Contributor permission at Subscription.	
+	.\Create-ServicePrincipal.ps1 -subId 'xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx' -prefix 'AdApp' -def 'Contributor' -scope Subscription
+
+Example 
+	Creates an App and grant Contributor permission at given Resource Group.	
+	.\Create-ServicePrincipal.ps1 -subId 'xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx' -prefix 'AdApp' -def 'Contributor' -scope ResourceGroup -resourceGroupName 'testResourceGroup'
+#&gt;
+
+Param (
+
+ # Provide Subscription ID
+ [Parameter(Mandatory=$true, 
+ Position=0,
+ ParameterSetName='Parameter Set 1')]
+ [ValidateNotNull()]
+ [Alias(&quot;subId&quot;)] 
+ $subscriptionId,
+
+ # Provide public DNS name label for cloudneeti application. if you are accessing it using azure dns label then enter the same. e.g. cnbasic.eastus2.cloudapp.azure.com
+ [Parameter(Mandatory=$false, 
+ Position=1,
+ ParameterSetName='Parameter Set 1')]
+ [ValidateNotNull()]
+ [Alias(&quot;dnsName&quot;)] 
+ $dnsNameLabel = 'null',
+
+  # Provide displayname suffix for AD application.
+  [Parameter(Mandatory=$false, 
+  Position=2,
+  ParameterSetName='Parameter Set 1')]
+  [ValidateNotNull()]
+  [Alias(&quot;prefix&quot;)] 
+  $adApplicationDisplayNamePrefix = 'cloudneeti',
+
+  # Name of the RBAC role that needs to be assigned to the principal i.e. Reader, Contributor, Virtual Network Administrator, etc.
+  [Parameter(Mandatory=$false, 
+  Position=3,
+  ParameterSetName='Parameter Set 1')]
+  [ValidateNotNull()]
+  [Alias(&quot;def&quot;)] 
+  $roleDefinitionName = 'Reader',
+
+  # The Scope of the role assignment
+  [Parameter(Mandatory=$false, 
+  Position=4,
+  ParameterSetName='Parameter Set 1')]
+  [ValidateSet (&quot;Subscription&quot;, &quot;ResourceGroup&quot;)]
+  $scope = 'Subscription',
+
+  # The Resource Group Name to assing permission.
+  [Parameter(Mandatory=$false, 
+  Position=5,
+  ParameterSetName='Parameter Set 1')]
+  [ValidateNotNull()]
+  [ValidateScript({$scope -eq 'ResourceGroup'})]   
+  $resourceGroupName
+
+)
+
+# Function to create a strong 15 length Strong &amp; Random password
+function New-AesManagedObject($key, $IV) {
+
+    $aesManaged = New-Object &quot;System.Security.Cryptography.AesManaged&quot;
+    $aesManaged.Mode = [System.Security.Cryptography.CipherMode]::CBC
+    $aesManaged.Padding = [System.Security.Cryptography.PaddingMode]::Zeros
+    $aesManaged.BlockSize = 128
+    $aesManaged.KeySize = 256
+
+    if ($IV) {
+        if ($IV.getType().Name -eq &quot;String&quot;) {
+            $aesManaged.IV = [System.Convert]::FromBase64String($IV)
+        }
+        else {
+            $aesManaged.IV = $IV
+        }
+    }
+
+    if ($key) {
+        if ($key.getType().Name -eq &quot;String&quot;) {
+            $aesManaged.Key = [System.Convert]::FromBase64String($key)
+        }
+        else {
+            $aesManaged.Key = $key
+        }
+    }
+
+    $aesManaged
+}
+
+function New-AesKey() {
+    $aesManaged = New-AesManagedObject 
+    $aesManaged.GenerateKey()
+    [System.Convert]::ToBase64String($aesManaged.Key)
+}
+
+$ErrorActionPreference = 'Stop'
+
+Import-Module AzureRM.Resources
+Import-Module AzureADPreview
+
+try {
+
+	# To login to Azure Resource Manager
+	Write-Host (&quot;1: Logging in to Azure Subscription &quot; + $SubscriptionId) -ForegroundColor Yellow
+	Try  
+	{  
+		Get-AzureRmSubscription -SubscriptionId $subscriptionId
+		$context = Set-AzureRmContext -SubscriptionId $subscriptionId
+	}  
+	Catch
+	{  
+		Login-AzureRmAccount -SubscriptionId $SubscriptionId
+		$context = Set-AzureRmContext -SubscriptionId $SubscriptionId
+	} 
+
+	switch ($scope) {
+		'Subscription' { $scopeUri = &quot;/subscriptions/&quot; + $SubscriptionId }
+		'ResourceGroup' { $scopeUri = &quot;/subscriptions/&quot; + $SubscriptionId + '/resourceGroups/' + $resourceGroupName }
+	}
+
+	$homePageURL = (&quot;http://www.cloudneeti.com&quot;)
+	$applicationDisplayName = ($adApplicationDisplayNamePrefix + (Get-Random -Minimum 100 -Maximum 999))
+	$identifierUris = &quot;http://&quot; + $applicationDisplayName
+
+	# Create Active Directory Application
+	try
+	{
+		Write-Host -ForegroundColor Yellow &quot;2: Creating a new azure active directory application - $applicationDisplayName.&quot;
+		#Create the 44-character key value
+		$keyValue = New-AesKey
+
+		# create the PSADPasswordCredential and populated it with start and end dates, a generated GUID, and my key value:
+		$psadCredential = New-Object Microsoft.Azure.Commands.Resources.Models.ActiveDirectory.PSADPasswordCredential
+		$startDate = Get-Date
+		$psadCredential.StartDate = $startDate
+		$psadCredential.EndDate = $startDate.AddYears(100)
+		$psadCredential.KeyId = [guid]::NewGuid()
+		$psadCredential.Password = $KeyValue
+
+		$azureAdApplication = New-AzureRmADApplication -DisplayName $applicationDisplayName -HomePage $homePageURL -IdentifierUris $identifierUris -PasswordCredentials $psadCredential
+
+	}
+	catch [System.Exception]
+	{
+		throw $_
+	}
+
+	# Update Azure AD Application with Response URLs.
+	if($dnsNameLabel -ne 'null'){
+		$ReplyUrls = &quot;http://&quot; + $dnsNameLabel + '/Account/SignIn'
+		Set-AzureRmADApplication -ObjectId $azureAdApplication.ObjectId -ReplyUrls $ReplyUrls
+	}
+
+	# Create Service Principal for the AD app
+	Write-Host -ForegroundColor Yellow &quot;3: Creating a new azure active directory service principal for applicationClientID - $($azureAdApplication.ApplicationId)&quot;
+	$servicePrincipal = New-AzureRmADServicePrincipal -ApplicationId $azureAdApplication.ApplicationId
+	$newRole = $null
+	$retries = 0;
+
+	While ($newRole -eq $null -and $retries -le 6)
+	 {
+		# Sleep here for a few seconds to allow the service principal application to become active (should only take a couple of seconds normally)
+		Start-Sleep 30
+		New-AzureRMRoleAssignment -RoleDefinitionName $roleDefinitionName -ServicePrincipalName $servicePrincipal.ApplicationId -Scope $scopeUri | Write-Verbose -ErrorAction SilentlyContinue
+		$newRole = Get-AzureRMRoleAssignment -ServicePrincipalName $servicePrincipal.ApplicationId -ErrorAction SilentlyContinue
+		$retries++;
+	 }
+
+	# Create Access Token Policy for Service Principal with one day expiry.
+	Write-Host -ForegroundColor Yellow &quot;4: Creating access token policy for service principal with one day expiry.&quot;
+	Connect-AzureAD
+	$adPolicy = New-AzureADPolicy -Definition @('{&quot;TokenLifetimePolicy&quot;:{&quot;Version&quot;:1,&quot;AccessTokenLifetime&quot;:&quot;23:59:59&quot;,&quot;MaxAgeSessionSingleFactor&quot;:&quot;23:59:59&quot;}}') -DisplayName &quot;CloudneetiAppToken&quot; -IsOrganizationDefault $false -Type &quot;TokenLifetimePolicy&quot;
+	Add-AzureADServicePrincipalPolicy -Id $servicePrincipal.Id.Guid -RefObjectId $adPolicy.id
+
+	############### SCRIPT OUTPUT ##########################
+
+	Write-Host -ForegroundColor Yellow &quot;`n5: Copy and provide the below information while configuring Cloudneeti.&quot;
+
+	$Output = @{
+		&quot;DomainName&quot; = ($context.Account.Id -split '@')[1];
+		&quot;TenantId&quot; = $context.Tenant.Id;
+		&quot;SubscriptionId&quot; = $context.Subscription.Id;
+		&quot;ADApplicationName&quot; = $azureAdApplication.DisplayName;
+		&quot;ADApplicationClientId&quot; = $azureAdApplication.ApplicationId;
+		&quot;ADApplicationPassword&quot; = $KeyValue;
+	}
+
+	Write-Host -ForegroundColor Yellow &quot;$($Output | Out-String)&quot;
+
+}
+catch {
+    Throw $_
+}
+
+
 </code></pre>
 
-<h3 id="blockquote">Blockquote</h3>
+<h4 id="azure-active-directory-application-permissions-must-be-configured-manually">Azure Active Directory application permissions must be configured manually</h4>
+
+<p>The following sections will help you configure each <strong>App Registration</strong> permission sets.
+1.  In the <a href="https://portal.azure.com/">Azure Portal</a>, select <strong>App
+    Registrations</strong>.
+2.  In App Registration blade, Click on the newly registered application if you had given the name &ldquo;Cloudneeti&rdquo; then click on the same.
+3.  Click <strong>Settings</strong>
+4.  Click <strong>Required Permissions</strong>
+5.  Click <strong>+Add</strong>.
+6.  Click <strong>Select an API</strong>.
+7.  In this step you will modify <strong>Windows Azure Active Directory</strong>, <strong>Microsoft Graph</strong>, <strong>Windows Azure Service Management API</strong></p>
 
 <blockquote>
-<p>This is a simple blockquote.</p>
+<p><strong>NOTE</strong> the order of your API’s maybe different than listed in this documentation.</p>
 </blockquote>
 
-<h3 id="image">Image</h3>
+<ol>
+<li><p>Select the <strong>Windows Azure Active Directory</strong> API</p>
 
-<p><img src="../../../../images/img-7.jpg" alt="image example" title="image" /></p>
+<ol>
+<li><p>Select the following 2 application permissions</p>
 
-<h3 id="buttons">Buttons</h3>
+<ul>
+<li><p><strong>Read and write directory data</strong></p></li>
 
-<p><button class="btn btn-primary">Primary Button</button>
-<button class="btn btn-secondary">secondary Button</button>
-<button class="btn btn-success">success Button</button>
-<button class="btn btn-info">info Button</button>
-<button class="btn btn-danger">danger Button</button>
-<button class="btn btn-warning">warning Button</button>
-<button class="btn btn-light">light Button</button>
-<button class="btn btn-dark">danger Button</button></p>
+<li><p><strong>Read directory data</strong></p></li>
+</ul></li>
+
+<li><p>Select the following 3 delegated permissions</p>
+
+<ul>
+<li><p><strong>Read all groups</strong></p></li>
+
+<li><p><strong>Read directory data</strong></p></li>
+
+<li><p><strong>Access the directory as the signed-in user</strong></p></li>
+</ul></li>
+</ol></li>
+
+<li><p>Click Select</p></li>
+
+<li><p>Select Done</p></li>
+
+<li><p>Click <strong>+Add</strong>.</p></li>
+
+<li><p>Select the <strong>Microsoft Graph</strong> API</p>
+
+<ol>
+<li><p>Select the following 6 application permissions</p>
+
+<ul>
+<li><p><strong>Read files in all site collections</strong></p></li>
+
+<li><p><strong>Read all groups</strong></p></li>
+
+<li><p><strong>Read directory data</strong></p></li>
+
+<li><p><strong>Read and write directory data</strong></p></li>
+
+<li><p><strong>Read all users’ full profiles</strong></p></li>
+
+<li><p><strong>Read all identity risk event information</strong></p></li>
+</ul></li>
+
+<li><p>Select the following 7 delegated permissions</p>
+
+<ul>
+<li><p><strong>Sign in and read user profiles</strong></p></li>
+
+<li><p><strong>Read all users’ basic profiles</strong></p></li>
+
+<li><p><strong>Read all users’ full profiles</strong></p></li>
+
+<li><p><strong>Read all groups</strong></p></li>
+
+<li><p><strong>Read directory data</strong></p></li>
+
+<li><p><strong>Read and write directory data</strong></p></li>
+
+<li><p><strong>Access the directory as the signed in user</strong></p></li>
+</ul></li>
+</ol></li>
+
+<li><p>Click Select</p></li>
+
+<li><p>Select Done</p></li>
+
+<li><p>Click <strong>+Add</strong></p></li>
+
+<li><p>Select the <strong>Windows Azure Service Management API</strong></p>
+
+<ol>
+<li><p>Select no application permissions</p></li>
+
+<li><p>Select the following 1 delegated permission</p>
+
+<ul>
+<li><strong>Access Azure Service Management as organization user</strong></li>
+</ul></li>
+</ol></li>
+
+<li><p>Click Select</p></li>
+
+<li><p>Select Done</p></li>
+</ol>
+
+<blockquote>
+<p>If the configurations are successful, you will see a table of permissions
+  similar to the following:</p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th><strong>API</strong></th>
+<th align="center"><strong>Application permissions</strong></th>
+<th align="center"><strong>Delegated permissions</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Windows Azure Active Directory</td>
+<td align="center">2</td>
+<td align="center">3</td>
+</tr>
+
+<tr>
+<td>Microsoft Graph</td>
+<td align="center">6</td>
+<td align="center">7</td>
+</tr>
+
+<tr>
+<td>Windows Azure Service Management</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="configure-cloudneeti-application">Configure Cloudneeti Application</h2>
+
+<ol>
+<li>After you finish these steps, you are ready with Cloudneeti Application, open a browser and go to <strong>:</strong> &lt;DNSname&gt;.&lt;region&gt;.cloudapp.azure.com</li>
+</ol>
 
         </div>
       </div>

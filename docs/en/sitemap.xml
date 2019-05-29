@@ -289,21 +289,6 @@
   </url>
   
   <url>
-    <loc>https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/elements/</loc>
-    <lastmod>2018-12-27T09:10:27+06:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/fr/elements/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/elements/"
-                />
-  </url>
-  
-  <url>
     <loc>https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/faq/</loc>
     <lastmod>2018-12-27T09:10:27+06:00</lastmod>
     <xhtml:link
@@ -330,6 +315,20 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/elements/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/fr/elements/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/elements/"
                 />
   </url>
   
