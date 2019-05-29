@@ -244,21 +244,6 @@
   </url>
   
   <url>
-    <loc>https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/billing-pricing/</loc>
-    <lastmod>2018-12-28T11:02:05+06:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/fr/billing-pricing/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/billing-pricing/"
-                />
-  </url>
-  
-  <url>
     <loc>https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/features/</loc>
     <lastmod>2018-12-28T11:02:05+06:00</lastmod>
     <xhtml:link
@@ -270,6 +255,21 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/features/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/billing-pricing/</loc>
+    <lastmod>2018-12-28T11:02:05+06:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/fr/billing-pricing/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/billing-pricing/"
                 />
   </url>
   
