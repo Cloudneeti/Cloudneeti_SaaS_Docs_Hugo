@@ -43,7 +43,7 @@ whiteColor = "#ffffff"
 
           [[Languages.en.menu.main]]
           parent = "pages"
-          name = "Elements"
+          name = "Get Started"
           URL = "/elements"
           weight = 1
 
