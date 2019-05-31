@@ -1,4 +1,4 @@
-baseURL = "https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs/"
+baseURL = "https://Cloudneeti.github.io/Cloudneeti_SaaS_Docs_Hugo/"
 theme = "dot"
 publishDir = "docs"
 
